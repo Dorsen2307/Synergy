@@ -13,7 +13,7 @@ def modified_array_2(array):
 n = 0
 sum = 0
 
-while (n < 1) or (n > 100000):
+while not(1 <= n <= 100000):
     n = int(input("Введите количество чисел: "))
     if not(1 <= n <= 100000):
         print("Значение должно быть от 1 до 100000!\n")
