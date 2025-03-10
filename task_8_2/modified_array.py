@@ -11,22 +11,26 @@ def modified_array_2(array):
     return modify_array
 
 n = 0
-sum = 0
+summ = 0
+k = 0
+arr = []
 
 while not(1 <= n <= 100000):
     n = int(input("Введите количество чисел: "))
     if not(1 <= n <= 100000):
         print("Значение должно быть от 1 до 100000!\n")
 
-while True:
+while k == 0:
     arr = list(map(int, input("Введите числа через пробел: ").split()))
 
     if len(arr) == n:
         for i in range(len(arr)):
-            sum += arr[i]
-        if 1 <= sum <= 10e9:
-            break
+            summ += arr[i]
+        if 1 <= summ <= 10e9:
+            k = 1
         else:
+            k = 0
+            summ = 0
             print("Значение должно быть от 1 до 10e9!\n")
     else:
         print("Неверное количество значений!")
