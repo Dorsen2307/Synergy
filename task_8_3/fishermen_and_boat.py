@@ -18,21 +18,21 @@ weight_in_boat = 0
 number_fishermen = 0
 weight = 0
 
-while (weight_in_boat < 1) or (weight_in_boat > 10e6):
+while not(1 <= weight_in_boat <= 10e6):
     weight_in_boat = int(input("Введите вес, который может выдержать лодка: "))
-    if (weight_in_boat > 10e6) or (weight_in_boat < 1):
+    if not(1 <= weight_in_boat <= 10e6):
         print(f"Вес должен быть между 1 и 10млн.\n")
 
-while (number_fishermen < 1) or (number_fishermen > 100):
+while not(1 <= number_fishermen <= 100):
     number_fishermen = int(input("Введите количество рыбаков: "))
-    if (number_fishermen > 100) or (number_fishermen < 1):
+    if not(1 <= number_fishermen <= 100):
         print(f"Количество рыбаков должно быть между 1 и 100.\n")
 
 fishermens_weight = [0 for i in range(number_fishermen)]
 for i in range(number_fishermen):
-    while (fishermens_weight[i] < 1) or (fishermens_weight[i] > weight_in_boat):
+    while not(1 <= fishermens_weight[i] <= weight_in_boat):
         weight = int(input(f"Введите вес {i + 1} рыбака: "))
-        if (weight > weight_in_boat) or (weight < 1):
+        if not(1 <= weight <= weight_in_boat):
             print(f"Вес должен быть между 1 и {weight_in_boat}.\n")
         else:
             fishermens_weight[i] = weight
