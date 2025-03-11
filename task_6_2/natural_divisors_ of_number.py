@@ -1,7 +1,7 @@
 x = 0
-while not(0 < x <= 2e9):
+while not(0 < x <= 2 ** 9):
     x = int(input("Введите число: "))
-    if not (0 < x <= 2e9):
+    if not (0 < x <= 2 ** 9):
         print("Число должно быть от 0 до 2e9!")
 
 i = 1
