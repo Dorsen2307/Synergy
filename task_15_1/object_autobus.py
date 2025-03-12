@@ -4,8 +4,8 @@ class Transport:
         self.max_speed = max_speed
         self.mileage = mileage
 
-Autobus = Transport("Renault Logan", 180, 12)
+autobus = Transport("Renault Logan", 180, 12)
 
-print(f"Название автомобиля: {Autobus.name}\n"
-      f"Скорость: {Autobus.max_speed} км/ч\n"
-      f"Пробег: {Autobus.mileage} км")
+print(f"Название автомобиля: {autobus.name}\n"
+      f"Скорость: {autobus.max_speed} км/ч\n"
+      f"Пробег: {autobus.mileage} км")
