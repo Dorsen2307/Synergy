@@ -5,6 +5,7 @@ from clouds import Clouds
 from helicopter import Helicopter
 from map import Map
 import json
+from utils import clear
 
 TICK_SLEEP = 0.05
 STATUS_SL_UPDATE = 100
@@ -23,7 +24,7 @@ MOVES = {'w': (-1, 0), 'd': (0, 1), 's': (1, 0), 'a': (0, -1)}
 # f - сохранение, g - восстановление
 def process_key(key):
     """Обработка нажатий клавиш"""
-    global helicopter, tick, clouds, field, status_save, status_load
+    global helicopter, clouds, field, status_sl, tick
 
     try:
         if hasattr(key, 'char') and key.char is not None:
@@ -65,15 +66,19 @@ listener = keyboard.Listener(
     on_release=process_key)
 listener.start()
 
-# tick = 1
+tick = 1
+
+clear()
+helicopter.first_screen()
+input("Нажмите ENTER для начала игры")
 
 while True:
-    os.system('cls' if os.name == 'nt' else 'clear') # cls
+    clear()
     field.process_helicopter(helicopter, clouds)
     helicopter.print_status(status_sl)
     field.print_map(helicopter, clouds)
     # print("TICK", tick)
-    # tick += 1
+    tick += 1
     time.sleep(TICK_SLEEP)
     if tick % TREE_UPDATE == 0:
         field.generate_tree()

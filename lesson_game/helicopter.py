@@ -1,5 +1,6 @@
 import os
 from utils import randcell
+from utils import clear
 
 # tank - запас воды
 # mxtank - максимальный запас воды
@@ -36,13 +37,30 @@ class Helicopter:
               f"❤️{self.lives}   "
               f"{status}")
 
+    def first_screen(self):
+
+
+        print("=" * 40)
+        print("|" + " " * 38 + "|")
+
+        print(f"| Управление игрой:     Легенда:       |")
+        print(f"| 'a' - влево           🟩 - земля     |")
+        print(f"| 'd' - вправо          🟦 - вода      |")
+        print(f"| 'w' - вверх           🥦 - дерево    |")
+        print(f"| 's' - вниз            💥 - огонь     |")
+        print(f"| 'f' - сохранить игру  🏰 - апгрейд   |")
+        print(f"| 'g' - загрузить игру  💒 - госпиталь |")
+
+        print("|" + " " * 38 + "|")
+        print("=" * 40)
+
     def game_over(self):
         """Вывод КОНЕЦ ИГРЫ"""
         global helico
 
         text = f"GAME OVER, YOUR SCORE IS {self.score}"
 
-        os.system('cls' if os.name == 'nt' else 'clear')
+        clear()
 
         print("=" * (len(text) + 4))
         print("|" + " " * (len(text) + 2) + "|")

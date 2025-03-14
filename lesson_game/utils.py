@@ -1,3 +1,4 @@
+import os
 from random import randint as rand
 
 def randbool(r, mxr):
@@ -15,3 +16,6 @@ def randcell2(x, y):
     t = rand(0, 3)
     dx, dy = moves[t][0], moves[t][1]
     return x + dx, y + dy
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
