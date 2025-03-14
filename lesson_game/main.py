@@ -65,7 +65,7 @@ listener = keyboard.Listener(
     on_release=process_key)
 listener.start()
 
-tick = 1
+# tick = 1
 
 while True:
     os.system('cls' if os.name == 'nt' else 'clear') # cls
@@ -73,7 +73,7 @@ while True:
     helicopter.print_status(status_sl)
     field.print_map(helicopter, clouds)
     # print("TICK", tick)
-    tick += 1
+    # tick += 1
     time.sleep(TICK_SLEEP)
     if tick % TREE_UPDATE == 0:
         field.generate_tree()

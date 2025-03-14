@@ -39,13 +39,17 @@ class Helicopter:
     def game_over(self):
         """Вывод КОНЕЦ ИГРЫ"""
         global helico
+
         text = f"GAME OVER, YOUR SCORE IS {self.score}"
+
         os.system('cls' if os.name == 'nt' else 'clear')
+
         print("=" * (len(text) + 4))
         print("|" + " " * (len(text) + 2) + "|")
         print(f"| {text} |")
         print("|" + " " * (len(text) + 2) + "|")
         print("=" * (len(text) + 4))
+
         exit(0)
 
     def export_data(self):
