@@ -22,11 +22,19 @@ class Helicopter:
         if 0 <= nx < self.h and 0 <= ny < self.w:
             self.x, self.y = nx, ny
 
-    def print_status(self):
+    def print_status(self, ssl):
         """Вывод статуса игры"""
-        print(f"💧{self.tank}/{self.mxtank} | "
-              f"🏆{self.score} | "
-              f"❤️{self.lives}")
+        if ssl[0]:
+            status = "💾 Сохранено..."
+        elif ssl[1]:
+            status = "📤 Игра загружена..."
+        else:
+            status = ""
+
+        print(f"💧{self.tank}/{self.mxtank}   "
+              f"🏆{self.score}   "
+              f"❤️{self.lives}   "
+              f"{status}")
 
     def game_over(self):
         """Вывод КОНЕЦ ИГРЫ"""

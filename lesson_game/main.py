@@ -1,4 +1,3 @@
-# 🌲 🟦 🚁 🟩 🔥 🏥 ❤️ 🗑️ 🏛️ ☁️ ⚡ 🏆
 import os
 import time
 from pynput import keyboard
@@ -8,10 +7,13 @@ from map import Map
 import json
 
 TICK_SLEEP = 0.05
+STATUS_SL_UPDATE = 100
 TREE_UPDATE = 50
 CLOUDS_UPDATE = 100
-FIRE_UPDATE = 75
+FIRE_UPDATE = 125
 MAP_W, MAP_H = 20, 10
+
+status_sl = [False, False]
 
 field = Map(MAP_W, MAP_H)
 clouds = Clouds(MAP_W, MAP_H)
@@ -21,7 +23,7 @@ MOVES = {'w': (-1, 0), 'd': (0, 1), 's': (1, 0), 'a': (0, -1)}
 # f - сохранение, g - восстановление
 def process_key(key):
     """Обработка нажатий клавиш"""
-    global helicopter, tick, clouds, field
+    global helicopter, tick, clouds, field, status_save, status_load
 
     try:
         if hasattr(key, 'char') and key.char is not None:
@@ -42,6 +44,8 @@ def process_key(key):
                 }
                 with open("level.json", "w") as file:
                     json.dump(data, file)
+
+                status_sl[0] = True
             # загрузка игры
             elif key_lower == 'g':
                 with open("level.json", "r") as file:
@@ -50,6 +54,8 @@ def process_key(key):
                     tick = data["tick"] or 1
                     field.import_data(data["field"])
                     clouds.import_data(data["clouds"])
+
+                status_sl[1] = True
     except AttributeError:
         print("OOOPS")
 
@@ -64,14 +70,16 @@ tick = 1
 while True:
     os.system('cls' if os.name == 'nt' else 'clear') # cls
     field.process_helicopter(helicopter, clouds)
-    helicopter.print_status()
+    helicopter.print_status(status_sl)
     field.print_map(helicopter, clouds)
-    print("TICK", tick)
+    # print("TICK", tick)
     tick += 1
     time.sleep(TICK_SLEEP)
     if tick % TREE_UPDATE == 0:
         field.generate_tree()
     if tick % FIRE_UPDATE == 0:
-        field.update_fires()
+        field.update_fires(helicopter)
     if tick % CLOUDS_UPDATE == 0:
         clouds.update()
+    if tick % STATUS_SL_UPDATE == 0:
+        status_sl[0], status_sl[1] = False, False
