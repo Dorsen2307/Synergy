@@ -17,16 +17,19 @@ class Helicopter:
         self.lives = 20
 
     def move(self, dx, dy):
+        """Перемещение вертолета"""
         nx, ny = dx + self.x, dy + self.y
         if 0 <= nx < self.h and 0 <= ny < self.w:
             self.x, self.y = nx, ny
 
     def print_status(self):
+        """Вывод статуса игры"""
         print(f"💧{self.tank}/{self.mxtank} | "
               f"🏆{self.score} | "
               f"❤️{self.lives}")
 
     def game_over(self):
+        """Вывод КОНЕЦ ИГРЫ"""
         global helico
         text = f"GAME OVER, YOUR SCORE IS {self.score}"
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -38,6 +41,7 @@ class Helicopter:
         exit(0)
 
     def export_data(self):
+        """Экспорт данных вертолета"""
         return {
             "score": self.score,
             "lives": self.lives,
@@ -46,6 +50,7 @@ class Helicopter:
         }
 
     def import_data(self, data):
+        """Импорт данных вертолета"""
         self.x = data["x"] or 0
         self.y = data["y"] or 0
         self.tank = data["tank"] or 0

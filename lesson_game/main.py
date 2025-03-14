@@ -20,6 +20,7 @@ helicopter = Helicopter(MAP_W, MAP_H)
 MOVES = {'w': (-1, 0), 'd': (0, 1), 's': (1, 0), 'a': (0, -1)}
 # f - сохранение, g - восстановление
 def process_key(key):
+    """Обработка нажатий клавиш"""
     global helicopter, tick, clouds, field
 
     try:
@@ -52,6 +53,7 @@ def process_key(key):
     except AttributeError:
         print("OOOPS")
 
+# слушатель событий нажатия клавиш
 listener = keyboard.Listener(
     on_press=None,
     on_release=process_key)

@@ -26,11 +26,13 @@ class Map:
         self.generate_hospital()
 
     def check_bounds(self, x, y):
+        """Проверка границ поля"""
         if x < 0 or y < 0 or x >= self.h or y >= self.w:
             return False
         return True
 
     def print_map(self, helicopter, clouds):
+        """Отрисовка карты"""
         print("🔳" * (self.w + 2) + " " * 4)
         for ri in range(self.h):
             print("🔳", end="")
@@ -75,11 +77,13 @@ class Map:
             self.cells[cx][cy] = 1
 
     def generate_upgrade_shop(self):
+        """Генератор домика апгрейда"""
         c = randcell(self.w, self.h)
         cx, cy = c[0], c[1]
         self.cells[cx][cy] = 4
 
     def generate_hospital(self):
+        """Генератор госпиталя"""
         c = randcell(self.w, self.h)
         cx, cy = c[0], c[1]
         if self.cells[cx][cy] != 4:
@@ -88,12 +92,14 @@ class Map:
             self.generate_hospital()
 
     def add_fire(self):
+        """Добавляет огонь на дерево"""
         c = randcell(self.w, self.h)
         cx, cy = c[0], c[1]
         if self.cells[cx][cy] == 1:
             self.cells[cx][cy] = 5
 
     def update_fires(self):
+        """Обновляем место пожара, если дерево сгорело, рисуем землю"""
         for ri in range(self.h):
             for ci in range(self.w):
                 cell = self.cells[ri][ci]
@@ -103,6 +109,7 @@ class Map:
             self.add_fire()
 
     def process_helicopter(self, helico, clouds):
+        """Процесс взаимодействия вертолета с миром"""
         c = self.cells[helico.x][helico.y]
         d = clouds.cells[helico.x][helico.y]
         if c == 2:
@@ -123,9 +130,11 @@ class Map:
                 helico.game_over()
 
     def export_data(self):
+        """Экспорт данных карты"""
         return {
             "cells": self.cells,
         }
 
     def import_data(self, data):
+        """Импорт данных карты"""
         self.cells = data["cells"] or [[0 for i in range(self.w)] for j in range(self.h)]
